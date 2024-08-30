@@ -1,0 +1,6 @@
+resources:
+  - https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/bundle.yaml
+  - namespace.yaml
+  - rbac.yaml
+  - prometheus.yaml
+namespace: prometheus
