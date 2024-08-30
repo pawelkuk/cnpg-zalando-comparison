@@ -3,4 +3,6 @@ resources:
   - namespace.yaml
   - rbac.yaml
   - prometheus.yaml
+  - service.yaml
+
 namespace: prometheus
