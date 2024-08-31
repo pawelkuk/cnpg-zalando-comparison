@@ -2,6 +2,19 @@ resources:
   - namespace.yaml
   - deployment.yaml
   - service.yaml
-  - pvc.yaml
 
 namespace: grafana
+
+configMapGenerator:
+  - name: providers
+    files:
+      - assets/provider.yml
+  - name: datasources
+    files:
+      - assets/prometheus_datasource.yml
+  - name: dashboards
+    files:
+      - assets/postgres_dashboard.json
+
+generatorOptions:
+  disableNameSuffixHash: true
