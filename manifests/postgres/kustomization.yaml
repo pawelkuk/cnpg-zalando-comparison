@@ -1,0 +1,10 @@
+resources:
+  - cluster.yaml
+  - namespace.yaml
+  - configmap.yaml
+  - secret.yaml
+  - backup.yaml
+  - scheduledbackup.yaml
+  - pod.yaml
+
+namespace: cluster

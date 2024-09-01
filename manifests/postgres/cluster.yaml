@@ -1,0 +1,71 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cluster
+spec:
+  instances: 3
+  storage:
+    size: 1Gi
+  monitoring:
+    enablePodMonitor: true
+    customQueriesConfigMap:
+      - name: metrics
+        key: queries
+  # Backup properties
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://backups
+      endpointURL: http://minio.minio.svc.cluster.local:9000
+      s3Credentials:
+        accessKeyId:
+          name: minio-creds
+          key: accessKeyId
+        secretAccessKey:
+          name: minio-creds
+          key: secretAccessKey
+      wal:
+        compression: gzip
+# ---
+# # restore from backup object example (needs a backup object with the name backup)
+# apiVersion: postgresql.cnpg.io/v1
+# kind: Cluster
+# metadata:
+#   name: cluster-restore
+# spec:
+#   instances: 3
+#   storage:
+#     size: 1Gi
+#   bootstrap:
+#     recovery:
+#       backup:
+#         name: backup
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: switchover-cluster
+spec:
+  primaryUpdateMethod: switchover
+  primaryUpdateStrategy: unsupervised
+  instances: 3
+  storage:
+    size: 1Gi
+  monitoring:
+    enablePodMonitor: true
+    customQueriesConfigMap:
+      - name: metrics
+        key: queries
+  # Backup properties
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://backups
+      endpointURL: http://minio.minio.svc.cluster.local:9000
+      s3Credentials:
+        accessKeyId:
+          name: minio-creds
+          key: accessKeyId
+        secretAccessKey:
+          name: minio-creds
+          key: secretAccessKey
+      wal:
+        compression: gzip
