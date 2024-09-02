@@ -6,3 +6,4 @@ bases:
   - cnpg/
   - minio/
   - cert-manager/
+  - zalando/

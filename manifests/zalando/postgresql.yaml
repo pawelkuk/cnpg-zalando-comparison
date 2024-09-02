@@ -1,0 +1,47 @@
+apiVersion: acid.zalan.do/v1
+kind: postgresql
+metadata:
+  name: zalando
+spec:
+  databases:
+    app: app
+  users:
+    app:
+      - login
+      - createdb
+  env:
+    - name: BACKUP_SCHEDULE
+      value: "0 * * * *"
+    - name: AWS_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: minio-creds
+          key: accessKeyId
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: minio-creds
+          key: secretAccessKey
+    - name: AWS_ENDPOINT
+      value: http://minio.minio.svc.cluster.local:9000
+    - name: AWS_REGION
+      value: eu01
+    - name: BACKUP_NUM_TO_RETAIN
+      value: "10"
+    - name: USE_WALG_BACKUP
+      value: "true"
+    - name: WAL_BUCKET_SCOPE_PREFIX
+      value: ""
+    - name: WAL_S3_BUCKET
+      value: wal-g
+    - name: WALG_DISABLE_S3_SSE
+      value: "true"
+    - name: AWS_S3_FORCE_PATH_STYLE
+      value: "true"
+  numberOfInstances: 1
+  postgresql:
+    version: "16"
+  spiloFSGroup: 103
+  teamId: postgres
+  volume:
+    size: 1Gi

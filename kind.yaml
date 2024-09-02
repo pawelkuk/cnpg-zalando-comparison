@@ -5,6 +5,13 @@ nodes:
     image: kindest/node:v1.27.3
   - role: worker
     image: kindest/node:v1.27.3
+    # kubeadmConfigPatches:
+    #   - |
+    #     kind: InitConfiguration
+    #     nodeRegistration:
+    #       kubeletExtraArgs:
+    #         "--runtime-request-timeout": "60m"
+    #         node-labels: "workload=database"
   - role: worker
     image: kindest/node:v1.27.3
   - role: worker

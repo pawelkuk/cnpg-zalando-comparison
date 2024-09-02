@@ -42,7 +42,9 @@ spec:
                   name: minio
                   key: rootPassword
             - name: MINIO_DEFAULT_BUCKETS
-              value: "backups"
+              value: "backups,wal-g"
+            - name: MINIO_BROWSER_LOGIN_ANIMATION
+              value: "off"
           ports:
             - containerPort: 9000
               name: minio
