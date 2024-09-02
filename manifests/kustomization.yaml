@@ -3,6 +3,6 @@ resources:
 bases:
   - prometheus/
   - grafana/
-  - postgres/
+  - cnpg/
   - minio/
   - cert-manager/
