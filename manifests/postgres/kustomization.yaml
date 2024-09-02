@@ -6,5 +6,8 @@ resources:
   - backup.yaml
   - scheduledbackup.yaml
   - pod.yaml
+  - certificate.yaml
+  - issuer.yaml
+  - service.yaml
 
 namespace: cluster

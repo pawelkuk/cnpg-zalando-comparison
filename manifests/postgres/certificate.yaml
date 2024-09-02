@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: postgres-server-cert
+spec:
+  secretName: postgres-server-cert
+  usages:
+    - server auth
+  dnsNames:
+    - cluster-lb.internal.paffcio.com
+    - cluster-rw
+    - cluster-rw.cluster
+    - cluster-rw.cluster.svc
+    - cluster-rw.cluster.svc.cluster.local
+    - cluster-r
+    - cluster-r.cluster
+    - cluster-r.cluster.svc
+    - cluster-r.cluster.svc.cluster.local
+    - cluster-ro
+    - cluster-ro.cluster
+    - cluster-ro.cluster.svc
+    - cluster-ro.cluster.svc.cluster.local
+  issuerRef:
+    name: selfsigned-issuer
+    kind: Issuer
+    group: cert-manager.io

@@ -5,3 +5,4 @@ bases:
   - grafana/
   - postgres/
   - minio/
+  - cert-manager/

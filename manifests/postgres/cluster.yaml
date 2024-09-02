@@ -5,7 +5,7 @@ metadata:
 spec:
   instances: 3
   storage:
-    size: 1Gi
+    size: 2Gi
   monitoring:
     enablePodMonitor: true
     customQueriesConfigMap:
@@ -48,6 +48,9 @@ spec:
   primaryUpdateMethod: switchover
   primaryUpdateStrategy: unsupervised
   instances: 3
+  certificates:
+    serverTLSSecret: postgres-server-cert
+    serverCASecret: postgres-server-cert
   storage:
     size: 1Gi
   monitoring:

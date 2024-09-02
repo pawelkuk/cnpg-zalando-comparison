@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cluster-lb
+spec:
+  ports:
+    - port: 5432
+      protocol: TCP
+      targetPort: postgresql
+  selector:
+    cnpg.io/cluster: cluster
+    cnpg.io/instanceRole: primary
+  type: LoadBalancer
